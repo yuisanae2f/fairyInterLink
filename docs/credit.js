@@ -7,7 +7,7 @@ docs["credit"] = function(lng = args()[0], nil) {
             p
             .set('<h1>크레딧</h1>')
             .tab('div', 'div')
-            .set('<img src="../src/credit.png" width="60%">');
+            .set('<img src="./src/credit.png" width="60%">');
         })(board.tent('_', 'div'));
     }
 
