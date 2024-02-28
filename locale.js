@@ -7,6 +7,7 @@ function locale(nil = "") {
     lh.set({ko: "언어", en: "Languages"}[aa[0]] ?? nil);
 
     if(args()[0] != 'ko') {
+        aa[0] = 'ko';
         let ko = l.tab("ko", "div").tent("a", "a");
         ko.set("한국어");
         ko.pos().href = `${window.location.href.split('?')[0]}?${btoa(argt(aa))}`;
