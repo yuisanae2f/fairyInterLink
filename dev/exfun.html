@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="console">
+        name: <input type="text" id="name" value='player_name'/>
+        initiative: <input type="text" id="initiative" value="player_initiative"/>
+
+        <fieldset id="commands">
+            <legend>commands</legend>
+    
+            prefix: <input type="text" class="prefix" value="player_commands_"/><br>
+            key: <input type="text" class="key" value="label"/><br>
+            val: <input type="text" class="val" value="exe"/><br>
+            count: <input type="number" class="count" value="11"><br>
+            etc:<br><textarea class="etc" cols="30" rows="10"></textarea>
+        </fieldset><br>
+    
+        <fieldset id="params">
+            <legend>params</legend>
+    
+            prefix: <input type="text" class="prefix" value="player_params_"/><br>
+            key: <input type="text" class="key" value="label"/><br>
+            val: <input type="text" class="val" value="value"/><br>
+            count: <input type="number" class="count" value="5"><br>
+            etc:<br><textarea class="etc" cols="30" rows="10">
+                ,{""label"" : """ & "정령_파워" & """, ""value"" : """ & player_params_value5 & """},
+                {""label"" : """ & "정령_내구" & """, ""value"" : """ & player_params_value6 & """}
+            </textarea>
+        </fieldset><br>
+    
+        <fieldset id="status">
+            <legend>status</legend>
+            prefix: <input type="text" class="prefix" value="player_status_"/><br>
+    
+            key: <input type="text" class="key" value="label"/><br>
+            val: <input type="text" class="val" value="value"/><br>
+            max: <input type="text" class="max" value="max"/><br>
+    
+            count: <input type="number" class="count" value="3"><br>
+            etc:<br><textarea class="etc" cols="30" rows="10"></textarea>
+        </fieldset><br>
+    
+        <fieldset name="memo">
+            <legend>memo</legend>
+            <textarea cols="30" rows="10" id="memo">
+player_memo_back & "\n" 
+& player_memo_back_ctn & "\n\n" 
+& player_memo_etc & "\n" 
+& player_memo_etc_ctn</textarea>
+        </fieldset><br>
+    </div>
+
+    <input type="button" value="누르면 밑에 변할 거임" onclick="main()"><br><br>
+    <fieldset>
+        <legend>이거 복사하셈</legend>
+        <div id="done"></div>
+    </fieldset>
+</body>
+<script>
+function main() {
+    let rtn = `
+    = "{
+        ""kind"" : ""character"",
+        ""data"" : {
+            ""name"" : """ & ${document.getElementById('name').value} & """,
+            ""initiative"" : " & ${document.getElementById('initiative').value} & ",
+            ""commands"" : """ & 
+            CONCATENATE(
+            ${((el) => {
+                let prm = el.getElementsByTagName('input');
+                let rtn_ = "";
+
+                for(let i = 0; i < prm[3].value; i++) {
+                    rtn_ += `${prm[0].value}${prm[2].value}${i}, " ", ${prm[0].value}${prm[1].value}${i}`;
+                    if(i + 1 != prm[3].value) rtn_ += ', "\\n", ';
+                }
+
+                return rtn_ + document.getElementsByClassName('etc')[0].innerHTML;
+            })(document.getElementById('commands'))})
+            & """,
+
+            ""memo"" : """ & ${document.getElementById('memo').innerHTML} & """,
+
+            ""params"" :  [
+                ${((prm) => {
+                    let rtn_ = "";
+
+                    for(let i = 0; i < prm[3].value; i++) {
+                        rtn_ += `{
+                            ""label"" : """ & ${prm[0].value}${prm[1].value}${i} & """,
+                            ""value"" : """ & ${prm[0].value}${prm[2].value}${i} & """
+                        }`;
+                        if(i + 1 != prm[3].value) rtn_ += ", ";
+                    }
+
+                    return rtn_ + document.getElementsByClassName('etc')[1].innerHTML;
+                })(document.getElementById('params').getElementsByTagName('input'))}
+            ],
+
+            ""status"" : [
+                ${((prm) => {
+                    let rtn_ = "";
+
+                    for(let i = 0; i < prm[4].value; i++) {
+                        rtn_ += `{
+                            ""label"" : """ & ${prm[0].value}${prm[1].value}${i} & """,
+                            ""value"" : """ & ${prm[0].value}${prm[2].value}${i} & """,
+                            ""max"" : """ & ${prm[0].value}${prm[3].value}${i} & """
+                        }`;
+
+                        if(i + 1 != prm[4].value) rtn_ += ", ";
+                    }
+
+                    return rtn_ + document.getElementsByClassName('etc')[2].innerHTML;
+                })(document.getElementById('status').getElementsByTagName('input'))}
+            ]
+        }
+    }
+        `;
+    document.getElementById('done').innerHTML = rtn;
+}
+</script>
+</html>
