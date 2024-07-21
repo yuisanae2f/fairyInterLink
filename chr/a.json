@@ -1,0 +1,25 @@
+{
+    "kind": "character", 
+    "data": 
+    {
+        "name": "", 
+        "initiative": 50, 
+        "memo": "백스토리\n\n\n기타\n", 
+        "params": [
+            {"label": "근력", "value": 8}, 
+            {"label": "속도", "value": 5}, 
+            {"label": "건강", "value": 10}, 
+            {"label": "지능", "value": 3}, 
+            {"label": "정령_파워", "value": 0}, 
+            {"label": "정령_내구", "value": 0}
+        ], 
+        
+        "status": 
+        [
+            {"label": " LP", "value": 100, "max": 100}, 
+            {"label": "SP", "value": 100, "max": 100}, 
+            {"label": "행동력", "value": 1, "max": 1}, 
+            {"label": "소지금", "value": 0, "max": 0}
+        ]
+    }
+}
