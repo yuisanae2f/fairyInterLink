@@ -310,11 +310,11 @@
             <h3>건강 <span id="Health Display"></span></h3>
             <input class="nKill" type="number" id="Health" onchange="Change()">
             <button onclick='(() => {
-                const DisplayChance = document.getElementById("Health Chance");
+                const DisplayChance = document.getElementById("Global Chance");
                 const Chance = new Number(DisplayChance.innerHTML);
 
                 if(Chance != 0) {
-                    const DOM = document.getElementById("Global Chance");
+                    const DOM = document.getElementById("Health");
                     DOM.value = Dice(1, 10);
                     DisplayChance.innerHTML = Chance - 1;
                     Change();
@@ -324,11 +324,11 @@
             <h3>지능 <span id="Int Display"></span></h3>
             <input class="nKill" type="number" id="Int" onchange="Change()">
             <button onclick='(() => {
-                const DisplayChance = document.getElementById("Int Chance");
+                const DisplayChance = document.getElementById("Global Chance");
                 const Chance = new Number(DisplayChance.innerHTML);
 
                 if(Chance != 0) {
-                    const DOM = document.getElementById("Global Chance");
+                    const DOM = document.getElementById("Int");
                     DOM.value = Dice(1, 10);
                     DisplayChance.innerHTML = Chance - 1;
                     Change();
