@@ -139,7 +139,7 @@
 
         Change();
     }
-    function Change(resetGlobalStatusChance = true) {
+    function Change() {
         function Limit(x, max) {
             return x < max ? x : max;
         }
@@ -165,18 +165,6 @@
         const SpeedDisplay = document.getElementById("Speed Display");
         const HealthDisplay = document.getElementById("Health Display");
         const IntDisplay = document.getElementById("Int Display");
-
-        const IntChance = document.getElementById("Int Chance");
-        const SpeedChance = document.getElementById("Speed Chance");
-        const HealthChance = document.getElementById("Health Chance");
-        const StrengthChance = document.getElementById("Strength Chance");
-
-        if(resetGlobalStatusChance) {
-            IntChance.innerHTML = 4;
-            SpeedChance.innerHTML = 4;
-            HealthChance.innerHTML = 4;
-            StrengthChance.innerHTML = 4;
-        }
 
         StrengthDisplay.innerHTML = Limit(Number(Strength ?? 0) + Global_State[Race].strength, 10);
         SpeedDisplay.innerHTML = Limit(Number(Speed ?? 0) + Global_State[Race].speed, 10);
@@ -287,35 +275,36 @@
             <input type="number" id="Gold" onchange="Change()">
 
             <h3>리롤</h3>
+            <div>남은 리롤 횟수: <span id="Global Chance">4</span></div> <br>
             <button onclick="Reroll()">전체 리롤</button>
 
             <input class="nKill" type="number" id="Strength" onchange="Change()">
             <h3>근력 <span id="Strength Display"></span></h3>
             <button onclick='(() => {
-                const DisplayChance = document.getElementById("Strength Chance");
+                const DisplayChance = document.getElementById("Global Chance");
                 const Chance = new Number(DisplayChance.innerHTML);
 
                 if(Chance != 0) {
                     const DOM = document.getElementById("Strength");
                     DOM.value = Dice(1, 10);
                     DisplayChance.innerHTML = Chance - 1;
-                    Change(false);
+                    Change();
                 }
-            })()'>리롤</button> 남은 횟수: <span id="Strength Chance">4</span>
+            })()'>리롤</button>
 
             <h3>속도 <span id="Speed Display"></span></h3>
             <input class="nKill" type="number" id="Speed" onchange="Change()">
             <button onclick='(() => {
-                const DisplayChance = document.getElementById("Speed Chance");
+                const DisplayChance = document.getElementById("Global Chance");
                 const Chance = new Number(DisplayChance.innerHTML);
 
                 if(Chance != 0) {
                     const DOM = document.getElementById("Speed");
                     DOM.value = Dice(1, 10);
                     DisplayChance.innerHTML = Chance - 1;
-                    Change(false);
+                    Change();
                 }
-            })()'>리롤 </button> 남은 횟수: <span id="Speed Chance">4</span>
+            })()'>리롤 </button>
 
 
             <h3>건강 <span id="Health Display"></span></h3>
@@ -325,12 +314,12 @@
                 const Chance = new Number(DisplayChance.innerHTML);
 
                 if(Chance != 0) {
-                    const DOM = document.getElementById("Health");
+                    const DOM = document.getElementById("Global Chance");
                     DOM.value = Dice(1, 10);
                     DisplayChance.innerHTML = Chance - 1;
-                    Change(false);
+                    Change();
                 }
-            })()'>리롤</button> 남은 횟수: <span id="Health Chance">4</span>
+            })()'>리롤</button>
 
             <h3>지능 <span id="Int Display"></span></h3>
             <input class="nKill" type="number" id="Int" onchange="Change()">
@@ -339,12 +328,12 @@
                 const Chance = new Number(DisplayChance.innerHTML);
 
                 if(Chance != 0) {
-                    const DOM = document.getElementById("Int");
+                    const DOM = document.getElementById("Global Chance");
                     DOM.value = Dice(1, 10);
                     DisplayChance.innerHTML = Chance - 1;
-                    Change(false);
+                    Change();
                 }
-            })()'>리롤</button> 남은 횟수: <span id="Int Chance">4</span>
+            })()'>리롤</button>
         </div>
         <legend><h2>능력치</h2></legend>
         
