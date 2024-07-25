@@ -1,0 +1,1 @@
+{ "kind" : "character", "data": { "name": "", "initiative": 1, "memo": "# 백스토리 \r\n\r\n\r\n# 기타 \r\n" "params": [ {"label": "Sex", "value": 0}, {"label": "근력", "value": 6}, {"label": "속도", "value": 8}, {"label": "건강", "value": 8}, {"label": "지능", "value": 7}, {"label: "소지금", "value": } ], "status": [ {"label": "LP", "value": , "max": }, {"label": "SP", "value": , "max": } ] } }

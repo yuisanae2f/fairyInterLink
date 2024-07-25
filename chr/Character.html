@@ -6,6 +6,12 @@
     <title>Character</title>
 </head>
 <script>
+    if(document.cookie === "") {
+        document.cookie = `'GlobalRerollChance': 4`;
+    }
+
+    //#region Classes
+
     class cRace {
         constructor(label = "", descryption = "", strength = 0, speed = 0, health = 0, int = 0) {
             this.label = label;
@@ -34,42 +40,42 @@
             if(stringVal) {
                 stringVal = stringVal.substring(0, stringVal.length - 2);
             }
-            return this.descryption + "<br><br>" + stringVal;
+            return this.descryption + `${stringVal == "" ? "" : "\n\n" + stringVal}`;
         }
     }
-    const Global_State = [
+    const Global_Race = [
         new cRace(
             "인간족", 
-            `평범한 인간입니다. <br/>다른 종족과 비교해서 능력치적인 이점은 없지만, 손해도 없습니다.`,
+            `평범한 인간입니다. \n다른 종족과 비교해서 능력치적인 이점은 없지만, 손해도 없습니다.`,
         ),
         new cRace(
             "수인족(근력형)", 
-            `육상생물의 피가 섞인 인간입니다. <br/>다른 동족과 비교해서 우수한 근력을 가지고 있습니다.`,
+            `육상생물의 피가 섞인 인간입니다. \n다른 동족과 비교해서 우수한 근력을 가지고 있습니다.`,
             1, 0, 0, -1
         ),
         new cRace(
             "수인족(건강형)", 
-            `육상생물의 피가 섞인 인간입니다. <br/>다른 동족과 비교해서 우수한 체력을 가지고 있습니다.`,
+            `육상생물의 피가 섞인 인간입니다. \n다른 동족과 비교해서 우수한 체력을 가지고 있습니다.`,
             0, 0, 1, -1
         ),
         new cRace(
             "어인족", 
-            `해양생물의 피가 섞인 인간입니다. <br/> 다습 환경일 경우 근력 판정 시 근력 +2 <br/>건조 환경일 경우 근력 판정 시 근력 -3`,
+            `해양생물의 피가 섞인 인간입니다. \n 다습 환경일 경우 근력 판정 시 근력 +2 \n건조 환경일 경우 근력 판정 시 근력 -3`,
             0, 0, 0, 0
         ),
         new cRace(
             "장이족", 
-            `뾰족한 귀를 가진 이들입니다. <br/> 몇몇은 이들을 '엘프'라고도 부릅니다.`,
+            `뾰족한 귀를 가진 이들입니다. \n 몇몇은 이들을 '엘프'라고도 부릅니다.`,
             -1, 1
         ),
         new cRace(
             "단장족", 
-            `작은 키를 가진 종족입니다.<br/>몇몇은 이들을 '드워프'라고도 부릅니다.`,
+            `작은 키를 가진 종족입니다.\n몇몇은 이들을 '드워프'라고도 부릅니다.`,
             1, -1
         ),
         new cRace(
             "용혈족", 
-            `용과 계약한 종족입니다. <br/>너무나도 오만한 탓에, 파티에 같은 용혈족이 존재할 경우, 그 수만큼 근력이 감소합니다.`,
+            `용과 계약한 종족입니다. \n너무나도 오만한 탓에, 파티에 같은 용혈족이 존재할 경우, 그 수만큼 근력이 감소합니다.`,
             1
         ),
         new cRace(
@@ -84,29 +90,55 @@
         ),
         new cRace(
             "천익족", 
-            `하얀색 날개를 가진 종족입니다. <br/>대체로 온화하며, 일부 고문서에서는 이들을 '천사'라 칭하기도 합니다.`,
+            `하얀색 날개를 가진 종족입니다. \n대체로 온화하며, 일부 고문서에서는 이들을 '천사'라 칭하기도 합니다.`,
             -1, 2, -1
         ),
         new cRace(
             "마족", 
-            `검은 날개를 가진, 패도적인 종족입니다. <br/>대체로 호전적이며, 일부 고문서에서는 이들을 '악마'라 칭하기도 합니다.`,
+            `검은 날개를 가진, 패도적인 종족입니다. \n대체로 호전적이며, 일부 고문서에서는 이들을 '악마'라 칭하기도 합니다.`,
             2, 0, 0, -2
         )
     ];
 
+    //#endregion
 
-    class Human {
+    function StringChange(str, tar, val) {
+        let rtn = "";
+        for(const c of str) {
+            if(c == tar) {
+                rtn += val;
+            } else rtn += c;
+        }
 
+        return rtn;
     }
 
-    class Fairy {
-
+    function jsonSuit(v) {
+        let rtn = "";
+        for(const i of v) {
+            if(i == "'") {
+                rtn += '"';
+            } else rtn += i;
+        }
+        return rtn;
     }
+
+    function cookieSuit(v) {
+        let rtn = "";
+        for(const i of v) {
+            if(i == '"') {
+                rtn += "'";
+            } else rtn += i;
+        }
+
+        return rtn.substring(1, v.length - 1);
+    }
+    var DataCookie = JSON.parse(jsonSuit("{" + document.cookie + "}"));
 
     document.addEventListener('DOMContentLoaded', function() {
         const Race = document.getElementById("Race");
-        for(let i = 0; i < Global_State.length; i++) {
-            Race.innerHTML += `<option value="${i}">${Global_State[i].label}</option>`;
+        for(let i = 0; i < Global_Race.length; i++) {
+            Race.innerHTML += `<option value="${i}">${Global_Race[i].label}</option>`;
         }
     });
 
@@ -126,72 +158,94 @@
         return M;
     }
     function Reroll() {
+        if(DataCookie["GlobalRerollChance"]) {
+            const Strength = document.getElementById("Strength");
+            const Speed = document.getElementById("Speed");
+            const Health = document.getElementById("Health");
+            const Int = document.getElementById("Int");
 
-        const Strength = document.getElementById("Strength");
-        const Speed = document.getElementById("Speed");
-        const Health = document.getElementById("Health");
-        const Int = document.getElementById("Int");
-
-        Strength.value = Dice(1, 10);
-        Speed.value = Dice(1, 10);
-        Health.value = Dice(2, 5);
-        Int.value = Dice(1, 10);
+            Strength.value = Dice(1, 10);
+            Speed.value = Dice(1, 10);
+            Health.value = Dice(2, 5);
+            Int.value = Dice(1, 10);
+        }
 
         Change();
     }
     function Change() {
+        document.cookie = cookieSuit(JSON.stringify(DataCookie));
+
         function Limit(x, max) {
             return x < max ? x : max;
         }
 
-        // isHuman
+        //#region Global
         const Sort = document.getElementById("Sort").value == 1 ? 1 : 0;
-        const Name = document.getElementById("name").value;
-        const Sex = document.getElementById("Sex").value == 1 ? 1 : 0;
-        const Result = document.getElementById("Result");
-        const Race = document.getElementById("Race").value;
-        const RaceDescryption = document.getElementById("RaceDescryption");
-        const RaceName = document.getElementById("RaceName");
-        const Gold = document.getElementById("Gold").value;
-        const LP = document.getElementById("LP").value;
-        const SP = document.getElementById("SP").value;
-
-        const Strength = document.getElementById("Strength").value;
-        const Speed = document.getElementById("Speed").value;
-        const Health = document.getElementById("Health").value;
-        const Int = document.getElementById("Int").value;
-
-        const StrengthDisplay = document.getElementById("Strength Display");
-        const SpeedDisplay = document.getElementById("Speed Display");
-        const HealthDisplay = document.getElementById("Health Display");
-        const IntDisplay = document.getElementById("Int Display");
-
-        StrengthDisplay.innerHTML = Limit(Number(Strength ?? 0) + Global_State[Race].strength, 10);
-        SpeedDisplay.innerHTML = Limit(Number(Speed ?? 0) + Global_State[Race].speed, 10);
-        HealthDisplay.innerHTML = Limit(Number(Health ?? 0) + Global_State[Race].health, 10);
-        IntDisplay.innerHTML = Limit(Number(Int ?? 0) + Global_State[Race].int, 10);
-
         const GlobalStyle = document.getElementById("GlobalStyle");
         GlobalStyle.innerHTML = `
         <style>
         .n${Sort ? 1 : 0} { display: block; } .n${Sort ? 0 : 1} { display: none; }
         .nKill { display: none; }
         </style>`;
-        Result.innerHTML = `
+
+        const Name = document.getElementById("name").value;
+        const BackStory = document.getElementById("BackStory").value;
+        const TextMisc = document.getElementById("TextMisc").value;
+        //#endregion
+
+        //#region Human
+        const Sex = document.getElementById("Sex").value == 1 ? 1 : 0;
+        const Race = document.getElementById("Race").value ?? 0;
+        const RaceDescryption = document.getElementById("RaceDescryption");
+        const RaceName = document.getElementById("RaceName");
+        const Gold = document.getElementById("Gold").value ?? 0;
+        const LP = document.getElementById("LP").value ?? 0;
+        const SP = document.getElementById("SP").value ?? 0;
+
+        const Strength = Limit(Number(document.getElementById("Strength").value ?? 0) + Global_Race[Race].strength, 10);
+        const Speed = Limit(Number(document.getElementById("Speed").value ?? 0) + Global_Race[Race].speed, 10);
+        const Health = Limit(Number(document.getElementById("Health").value ?? 0) + Global_Race[Race].health, 10);
+        const Int = Limit(Number(document.getElementById("Int").value ?? 0) + Global_Race[Race].int, 10);
+        const CCfolia = document.getElementById("CCfolia");
+
+        /*Speed - Health 인데 최대값 5, 최소값 1*/
+        const Initiative = Speed - Health > 5 ? 5 : Speed - Health < 1 ? 1 : Speed - Health;
+
+        const ATK = Dice(Strength, 2);
+
+
+        const StrengthDisplay = document.getElementById("Strength Display");
+        const SpeedDisplay = document.getElementById("Speed Display");
+        const HealthDisplay = document.getElementById("Health Display");
+        const IntDisplay = document.getElementById("Int Display");
+
+        const GlobalChanceDisplay = document.getElementById("Global Chance");
+        GlobalChanceDisplay.innerHTML = DataCookie["GlobalRerollChance"];
+
+        StrengthDisplay.innerHTML = Strength;
+        SpeedDisplay.innerHTML = Speed;
+        HealthDisplay.innerHTML = Health;
+        IntDisplay.innerHTML = Int;
+        //#endregion
+
+        
+        RaceDescryption.innerHTML = StringChange(Global_Race[Race].Dump(), "\n", "<br/>");
+        RaceName.innerHTML = Global_Race[Race].label;
+        CCfolia.innerHTML = `
         {
             "kind" : "character", 
             "data": {
                 "name": "${Name}",
-                "initiative", 50,
-
+                "initiative": ${Initiative},
+                "memo": "${Name}\\r\\n\\r\\n# ${RaceName.innerHTML} \\r\\n${StringChange(Global_Race[Race].Dump(), "\n", "\\r\\n")}\\r\\n\\r\\n# 백스토리 \\r\\n${StringChange(BackStory, '\n', '\\r\\n')}\\r\\n\\r\\n# 기타 \\r\\n${StringChange(TextMisc, '\n', '\\r\\n')}",
                 "params": [
                     ${Sort ? `
-                    {"label": "Sex", "value": ${Sex}},
-                    {"label": "근력", "value": ${StrengthDisplay.innerHTML}},
-                    {"label": "속도", "value": ${SpeedDisplay.innerHTML}},
-                    {"label": "건강", "value": ${HealthDisplay.innerHTML}},
-                    {"label": "지능", "value": ${IntDisplay.innerHTML}},
-                    {"label: "소지금", "value": ${Gold}}
+                    {"label": "성별", "value": "${Sex ? "여자" : "남자"}"},
+                    {"label": "근력", "value": "${StrengthDisplay.innerHTML}"},
+                    {"label": "속도", "value": "${SpeedDisplay.innerHTML}"},
+                    {"label": "건강", "value": "${HealthDisplay.innerHTML}"},
+                    {"label": "지능", "value": "${IntDisplay.innerHTML}"},
+                    {"label": "소지금", "value": "${Gold}"}
                     ` : `
 
                     `}
@@ -206,8 +260,6 @@
             }
         }
         `;
-        RaceDescryption.innerHTML = Global_State[Race].Dump();
-        RaceName.innerHTML = Global_State[Race].label;
     }
 
     // DOMContentLoaded 이벤트 리스너
@@ -231,6 +283,11 @@
             <option value="1">Human</option>
             <option value="0">Fairy</option>
         </select>
+
+        <h3>백스토리</h3>
+        <textarea id="BackStory" onchange="Change()"></textarea>
+        <h3>기타</h3>
+        <textarea id="TextMisc" onchange="Change()"></textarea>
     </fieldset><br>
 
     <fieldset>
@@ -241,11 +298,11 @@
             페어리를 작성하기 위해 사용한 모델 카드 이름을 적으면 됩니다.  <br>
             해당 카드 명을 기준으로 파워 수치와 내구 수치, 스킬의 밸런스가 조정됩니다.
         </div><br class="n0">
-        <input type="text" id="name" onchange="Change()"> <br>
+        <input type="text" id="name" onchange="Change()" value="무명"> <br>
 
         <div class="n1">
             <h3>성별</h3>
-            <select name="Sex" id="Sex" onchange="Change()">
+            <select name="Sex" id="Sex" onchange="Change()" value="0">
                 <option value="0">남자</option>
                 <option value="1">여자</option>
             </select>
@@ -268,11 +325,11 @@
     <fieldset>
         <div class="n1">
             <h3>LP</h3>
-            <input type="text" id="LP" onchange="Change()">
+            <input type="number" id="LP" onchange="Change()" value="0">
             <h3>SP</h3>
-            <input type="text" id="SP" onchange="Change()">
+            <input type="number" id="SP" onchange="Change()" value="0">
             <h3>소지금</h3>
-            <input type="number" id="Gold" onchange="Change()">
+            <input type="number" id="Gold" onchange="Change()" value="0">
 
             <h3>리롤</h3>
             <div>남은 리롤 횟수: <span id="Global Chance">4</span></div> <br>
@@ -281,13 +338,10 @@
             <input class="nKill" type="number" id="Strength" onchange="Change()">
             <h3>근력 <span id="Strength Display"></span></h3>
             <button onclick='(() => {
-                const DisplayChance = document.getElementById("Global Chance");
-                const Chance = new Number(DisplayChance.innerHTML);
-
-                if(Chance != 0) {
+                if(DataCookie["GlobalRerollChance"] != 0) {
                     const DOM = document.getElementById("Strength");
                     DOM.value = Dice(1, 10);
-                    DisplayChance.innerHTML = Chance - 1;
+                    DataCookie["GlobalRerollChance"] -= 1;
                     Change();
                 }
             })()'>리롤</button>
@@ -295,13 +349,10 @@
             <h3>속도 <span id="Speed Display"></span></h3>
             <input class="nKill" type="number" id="Speed" onchange="Change()">
             <button onclick='(() => {
-                const DisplayChance = document.getElementById("Global Chance");
-                const Chance = new Number(DisplayChance.innerHTML);
-
-                if(Chance != 0) {
+                if(DataCookie["GlobalRerollChance"] != 0) {
                     const DOM = document.getElementById("Speed");
                     DOM.value = Dice(1, 10);
-                    DisplayChance.innerHTML = Chance - 1;
+                    DataCookie["GlobalRerollChance"] -= 1;
                     Change();
                 }
             })()'>리롤 </button>
@@ -310,13 +361,10 @@
             <h3>건강 <span id="Health Display"></span></h3>
             <input class="nKill" type="number" id="Health" onchange="Change()">
             <button onclick='(() => {
-                const DisplayChance = document.getElementById("Global Chance");
-                const Chance = new Number(DisplayChance.innerHTML);
-
-                if(Chance != 0) {
+                if(DataCookie["GlobalRerollChance"] != 0) {
                     const DOM = document.getElementById("Health");
                     DOM.value = Dice(1, 10);
-                    DisplayChance.innerHTML = Chance - 1;
+                    DataCookie["GlobalRerollChance"] -= 1;
                     Change();
                 }
             })()'>리롤</button>
@@ -324,16 +372,15 @@
             <h3>지능 <span id="Int Display"></span></h3>
             <input class="nKill" type="number" id="Int" onchange="Change()">
             <button onclick='(() => {
-                const DisplayChance = document.getElementById("Global Chance");
-                const Chance = new Number(DisplayChance.innerHTML);
-
-                if(Chance != 0) {
+                if(DataCookie["GlobalRerollChance"] != 0) {
                     const DOM = document.getElementById("Int");
                     DOM.value = Dice(1, 10);
-                    DisplayChance.innerHTML = Chance - 1;
+                    DataCookie["GlobalRerollChance"] -= 1;
                     Change();
                 }
             })()'>리롤</button>
+
+            
         </div>
         <legend><h2>능력치</h2></legend>
         
@@ -341,7 +388,9 @@
 
     <fieldset>
         <legend><h2>Result</h2></legend>
-        <div id="Result"></div>
+        <h3>CCfolia</h3>
+        <div><a href="https://ccfolia.com/">코코폴리아</a>에서 바로 캐릭터를 생성할 수 있는 문자열.</div><br>
+        <fieldset><div id="CCfolia"></div></fieldset>
     </fieldset>
 </body>
 </html>
