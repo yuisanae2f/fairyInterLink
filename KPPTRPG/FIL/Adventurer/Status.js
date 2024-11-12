@@ -1,7 +1,5 @@
-import { TClass } from "../Raw/TClass";
-
 /**
- * @typedef {object} rStatusAdv
+ * @typedef {object} KPPTRPG_FIL_rStatusAdv
  * @property {number} LP LP
  * @property {number} SP SP
  * @property {number} STR Strength

@@ -1,4 +1,6 @@
+import { KPPTRPG_FIL_Link } from "./FIL/Link"
+
 /**
  * @typedef {object} rFairyInterLink
- * @property {}
+ * @property {KPPTRPG_FIL_Link} links
  */

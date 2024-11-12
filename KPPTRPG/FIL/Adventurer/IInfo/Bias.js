@@ -1,16 +1,12 @@
-import { TClass } from "../../Raw/TClass"
-
 /**
- * @typedef {number} BiasEnum_t
+ * @typedef {number} KPPTRPG_FIL_BiasEnum_t
  */
 
 /**
- * @enum {BiasEnum_t}
+ * @enum {KPPTRPG_FIL_BiasEnum_t}
  * 
- * @brief \
- * Bitmaskers for Bias
  */
-const BiasEnumBuilder = {
+export const KPPTRPG_FIL_BiasEnumBuilder = {
     CHAOS:       0b0010,
 
     /**

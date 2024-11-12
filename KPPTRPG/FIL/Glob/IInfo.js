@@ -1,5 +1,5 @@
 /**
- * @typedef {object} rIInfoGlob
+ * @typedef {object} KPPTRPG_FIL_rIInfoGlob
  * @property {string} name
  * @property {string} PLName
  * @property {string} profile

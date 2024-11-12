@@ -1,7 +1,7 @@
 /**
  * @template T
  */
-export class TClass {
+export class KPPTRPG_FIL_TClass {
     /**
      * @param {T} data
      */
