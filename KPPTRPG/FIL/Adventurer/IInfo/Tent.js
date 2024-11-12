@@ -17,7 +17,6 @@ export class KPPTRPG_FIL_IInfoAdv_TentId extends KPPTRPG_Core_Tent {
 }
 
 
-
 /**
  * @param {KPPTRPG_FIL_IInfoAdv_TentId} idI 
  * @returns {KPPTRPG_FIL_rIInfoAdv}

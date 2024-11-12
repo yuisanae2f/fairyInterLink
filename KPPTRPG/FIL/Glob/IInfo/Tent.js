@@ -90,7 +90,7 @@ export function KPPTRPG_FIL_cIInfoGlob_Tent(idI, idO, rootI, rootO) {
     {
         for(const root of [rootI, rootO]) {
             const titleHeight = document.createElement("span");
-            titleHeight.innerHTML = "Profile: ";
+            titleHeight.innerHTML = "Profile: <br/>";
             root.appendChild(titleHeight);            
         }
 
