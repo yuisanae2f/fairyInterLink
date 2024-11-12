@@ -7,6 +7,8 @@
  * @property {string} etc
  */
 
+
+
 /**
  * @param {Partial<KPPTRPG_FIL_rIInfoGlob>} a 
  * @returns {KPPTRPG_FIL_rIInfoGlob}

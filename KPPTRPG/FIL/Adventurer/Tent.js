@@ -1,7 +1,7 @@
 import { KPPTRPG_Core_Tent } from "../../Core/Tent.js"
-import { KPPTRPG_FIL_IInfoAdv_TentId, KPPTRPG_FIL_cIInfoAdv_Tent } from "./IInfo.js";
+import { KPPTRPG_FIL_IInfoAdv_TentId, KPPTRPG_FIL_cIInfoAdv_Tent } from "./IInfo/Tent.js";
 
-export class KPPTRPG_FIL_Adv_Tent_IdDiv0
+export class KPPTRPG_FIL_TentAdv_IdDiv0
     extends KPPTRPG_Core_Tent {
     /** @param {string} pre  */
     constructor(pre) { super(pre) }
@@ -10,15 +10,15 @@ export class KPPTRPG_FIL_Adv_Tent_IdDiv0
     Comp() { return super.gword("comp"); }
 }
 
-export class KPPTRPG_FIL_Adv_Tent_Ids 
+export class KPPTRPG_FIL_TentAdv_Ids 
     extends KPPTRPG_Core_Tent {
     /** * @param {string} pre  */
     constructor(pre) { super(pre) }
 
-    /** @returns {KPPTRPG_FIL_Adv_Tent_IdDiv0}  */
-    CompI() { return new KPPTRPG_FIL_Adv_Tent_IdDiv0(super.gword("compI")); }
-    /** @returns {KPPTRPG_FIL_Adv_Tent_IdDiv0}  */
-    CompO() { return new KPPTRPG_FIL_Adv_Tent_IdDiv0(super.gword("compO")); }
+    /** @returns {KPPTRPG_FIL_TentAdv_IdDiv0}  */
+    CompI() { return new KPPTRPG_FIL_TentAdv_IdDiv0(super.gword("compI")); }
+    /** @returns {KPPTRPG_FIL_TentAdv_IdDiv0}  */
+    CompO() { return new KPPTRPG_FIL_TentAdv_IdDiv0(super.gword("compO")); }
 
     /** @returns {KPPTRPG_FIL_IInfoAdv_TentId} */
     IInfoAdvI() { return new KPPTRPG_FIL_IInfoAdv_TentId(super.gword("iiadvI")); }
@@ -28,11 +28,11 @@ export class KPPTRPG_FIL_Adv_Tent_Ids
 
 /**
  * Makes the elements to start
- * @param {KPPTRPG_FIL_Adv_Tent_Ids} ids 
+ * @param {KPPTRPG_FIL_TentAdv_Ids} ids 
  * @param {HTMLDivElement} divI
  * @param {HTMLDivElement} divO
  */
-export function KPPTRPG_FIL_Adv_cTent_Init(ids, divI, divO) {
+export function KPPTRPG_FIL_cTentAdv_Init(ids, divI, divO) {
     {
         for(const div0 of [divI, divO])
         {
