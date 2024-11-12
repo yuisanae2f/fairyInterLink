@@ -1,6 +1,7 @@
 import { KPPTRPG_FIL_Bias_ToString, KPPTRPG_FIL_BiasEnumBuilder } from "../IInfo/Bias.js";
 import { KPPTRPG_Core_Tent } from "../../../Core/Tent.js";
 import { KPPTRPG_FIL_cIInfoGlob_Tent, KPPTRPG_FIL_IInfoGlob_TentId, KPPTRPG_FIL_cIInfoGlob_MkHTML } from "../../Glob/IInfo/Tent.js";
+import { KPPTRPG_FIL_cIInfoAdv_Set } from "../IInfo.js"
 
 export class KPPTRPG_FIL_IInfoAdv_TentId extends KPPTRPG_Core_Tent {
     /** @param {string} pre */
@@ -30,6 +31,7 @@ export function KPPTRPG_FIL_cIInfoAdv_MkHTML(idI) {
         return _in.value;
     }
 
+    
     return KPPTRPG_FIL_cIInfoAdv_Set({
         glob: KPPTRPG_FIL_cIInfoGlob_MkHTML(idI.Glob()),
         height: parseInt(gByID(idI.Height()) ?? 0),

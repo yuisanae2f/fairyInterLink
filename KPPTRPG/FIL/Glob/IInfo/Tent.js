@@ -1,4 +1,5 @@
 import { KPPTRPG_Core_Tent } from "../../../Core/Tent.js";
+import { KPPTRPG_FIL_cIInfoGlob_Set } from "../IInfo.js";
 
 export class KPPTRPG_FIL_IInfoGlob_TentId extends KPPTRPG_Core_Tent {
     /** @param {string} a  */
