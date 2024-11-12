@@ -1,4 +1,8 @@
 /**
+ * @module KPPTRPG_CCF_CharData_js
+ */
+
+/**
  * @typedef {string | null} KPPTRPG_CCF_StrNil_t String or null selectable
  */
 

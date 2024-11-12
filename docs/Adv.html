@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adv</title>
+</head>
+<body>
+    <div><h1>Input Section</h1></div>
+    <div><h1>Output Section</h1></div>
+</body>
+
+<script type="module" defer>
+    import { KPPTRPG_FIL_Adv_cTent_Init, KPPTRPG_FIL_Adv_Tent_Ids } from "../KPPTRPG/FIL/Adventurer/Tent.js"
+    KPPTRPG_FIL_Adv_cTent_Init(
+        new KPPTRPG_FIL_Adv_Tent_Ids("a"),
+        document.body.getElementsByTagName("div")[0],
+        document.body.getElementsByTagName("div")[1]
+    );
+
+</script>
+
+</html>
