@@ -46,7 +46,10 @@
  */
 
 /**
+ * @summary \
+ * Clipboard API \
+ * Details: https://docs.ccfolia.com/developer-api/clipboard-api
  * @typedef {object} KPPTRPG_CCF_CharData
- * @property {string} kind
+ * @property {"character"} kind
  * @property {Partial<KPPTRPG_CCF_Char_t>} data
  */

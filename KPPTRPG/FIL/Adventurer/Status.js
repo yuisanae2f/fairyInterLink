@@ -8,4 +8,5 @@
  * @property {number} INT Intelligence
  * @property {number} MOV Move Point
  * @property {number} G Money
+ * @property {number} INIT Initiative
  */

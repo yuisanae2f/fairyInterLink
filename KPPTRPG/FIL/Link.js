@@ -11,28 +11,21 @@ import { KPPTRPG_FIL_TClass } from "./Raw/TClass";
  */
 
 /**
- * @extends {KPPTRPG_FIL_TClass<KPPTRPG_FIL_lpLink>}
+ * @param {KPPTRPG_Core_Ptr_t<KPPTRPG_FIL_lpLink>} self
  */
-export class KPPTRPG_FIL_Link extends KPPTRPG_FIL_TClass {
-    /** * @param {KPPTRPG_FIL_lpLink} data  */
-    constructor(data) {
-        super(data);
-    }
+export function KPPTRPG_FIL_cLink_Sort(self) {
+    self.mem.sort(
+        (a, b) => a.bond - b.bond
+    );
+}
 
-    /**
-     * @returns {void}
-     */
-    sort() {
-        this.data.sort(
-            (a, b) => a.bond - b.bond
-        );
-    }
-
-    /**
-     * @returns {KPPTRPG_FIL_rLinkEl}
-     */
-    favourite() {
-        this.sort();
-        return this.data[0];
-    }
+/**
+ * Returns the favourite member (in a type of link)
+ * @param {KPPTRPG_Core_Ptr_t<KPPTRPG_FIL_lpLink>} self 
+ * @param {number} memi
+ * @returns {KPPTRPG_FIL_rLinkEl}
+ */
+export function KPPTRPG_FIL_cLink_Favourite(self, memi = 0) {
+    KPPTRPG_FIL_Link_Sort(self);
+    return self.mem[memi];
 }
