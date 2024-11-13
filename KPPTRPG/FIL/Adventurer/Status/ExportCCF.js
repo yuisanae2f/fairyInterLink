@@ -1,5 +1,4 @@
 /**
- * 
  * @param {KPPTRPG_CCF_Char_t} dest
  * @param {KPPTRPG_FIL_rStatusAdv} src0
  * @param {KPPTRPG_FIL_rStatusAdv} src1

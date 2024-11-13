@@ -26,12 +26,7 @@ export function KPPTRPG_FIL_cIInfoGlob_MkHTML(idi) {
         if (_in.value == "") return undefined;
         return _in.value;
     }
-
-    function gByInner(id) {
-        const _in = document.getElementById(id);
-        return _in.innerHTML;
-    }
-
+    
     return KPPTRPG_FIL_cIInfoGlob_Set({
         name: gByID(idi.Name()),
         PLName: gByID(idi.PLName()),
@@ -90,12 +85,13 @@ export function KPPTRPG_FIL_cIInfoGlob_Tent(idI, idO, rootI, rootO) {
     {
         for(const root of [rootI, rootO]) {
             const titleHeight = document.createElement("span");
-            titleHeight.innerHTML = "Profile: <br/>";
+            titleHeight.innerHTML = "Profile: ";
             root.appendChild(titleHeight);            
         }
-
+        
         const el = document.createElement('input');
         el.id = idI.Profile();
+        rootO.appendChild(document.createElement('br'));
 
         rootI.appendChild(el);
         rootI.appendChild(document.createElement("br"));
@@ -108,44 +104,53 @@ export function KPPTRPG_FIL_cIInfoGlob_Tent(idI, idO, rootI, rootO) {
     } // Profile
 
     {
-        for(const root of [rootI, rootO]) {
-            const titleHeight = document.createElement("span");
-            titleHeight.innerHTML = "Background Story: <br/>";
-            root.appendChild(titleHeight);            
-        }
+        const _de = document.createElement("details");
+        const _sum = document.createElement("summary");
+        _sum.innerHTML = "Summary for large input";
+        _de.appendChild(_sum);
+        
+        {
+            for(const root of [_de, rootO]) {
+                const titleHeight = document.createElement("span");
+                titleHeight.innerHTML = "Background Story: <br/>";
+                root.appendChild(titleHeight);
+            }
+    
+            const el = document.createElement('textarea');
+            el.id = idI.Background();
+            el.rows = 10
+            el.cols = 30
+    
+            _de.appendChild(el);
+            _de.appendChild(document.createElement("br"));
+    
+            const out = document.createElement('pre');
+            out.id = idO.Background();
+            rootO.appendChild(out);
+            rootO.appendChild(document.createElement("br"));
+        } // Background
+    
+        {
+            for(const root of [_de, rootO]) {
+                const titleHeight = document.createElement("span");
+                titleHeight.innerHTML = "Etc: <br/>";
+                root.appendChild(titleHeight);            
+            }
+    
+            const el = document.createElement('textarea');
+            el.id = idI.Etc();
+            el.rows = 10
+            el.cols = 30
+    
+            _de.appendChild(el);
+            _de.appendChild(document.createElement("br"));
+    
+            const out = document.createElement('pre');
+            out.id = idO.Etc();
+            rootO.appendChild(out);
+            rootO.appendChild(document.createElement("br"));
+        } // Etc
 
-        const el = document.createElement('textarea');
-        el.id = idI.Background();
-        el.rows = 10
-        el.cols = 30
-
-        rootI.appendChild(el);
-        rootI.appendChild(document.createElement("br"));
-
-        const out = document.createElement('pre');
-        out.id = idO.Background();
-        rootO.appendChild(out);
-        rootO.appendChild(document.createElement("br"));
-    } // Background
-
-    {
-        for(const root of [rootI, rootO]) {
-            const titleHeight = document.createElement("span");
-            titleHeight.innerHTML = "Etc: <br/>";
-            root.appendChild(titleHeight);            
-        }
-
-        const el = document.createElement('textarea');
-        el.id = idI.Etc();
-        el.rows = 10
-        el.cols = 30
-
-        rootI.appendChild(el);
-        rootI.appendChild(document.createElement("br"));
-
-        const out = document.createElement('pre');
-        out.id = idO.Etc();
-        rootO.appendChild(out);
-        rootO.appendChild(document.createElement("br"));
-    } // Etc
+        rootI.appendChild(_de);
+    } // details
 }

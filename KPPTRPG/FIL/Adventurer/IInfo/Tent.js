@@ -2,10 +2,17 @@ import { KPPTRPG_FIL_Bias_ToString, KPPTRPG_FIL_BiasEnumBuilder } from "../IInfo
 import { KPPTRPG_Core_Tent } from "../../../Core/Tent.js";
 import { KPPTRPG_FIL_cIInfoGlob_Tent, KPPTRPG_FIL_IInfoGlob_TentId, KPPTRPG_FIL_cIInfoGlob_MkHTML } from "../../Glob/IInfo/Tent.js";
 import { KPPTRPG_FIL_cIInfoAdv_Set } from "../IInfo.js"
+import { KPPTRPG_FIL_TentAdv_Ids } from "../Tent.js"
+import { KPPTRPG_Fil_cAdvO, KPPTRPG_FIL_cAdvI } from "../IO.js"
+import { KPPTRPG_FIL_cAdventurer_ExportCCF } from "../../Adventurer.js"
 
+/** @extends {KPPTRPG_Core_Tent<KPPTRPG_FIL_TentAdv_Ids>} */
 export class KPPTRPG_FIL_IInfoAdv_TentId extends KPPTRPG_Core_Tent {
-    /** @param {string} pre */
-    constructor(pre) { super(pre) }
+    /** 
+     * @param {string} pre 
+     * @param {KPPTRPG_FIL_TentAdv_Ids} par
+     * */
+    constructor(pre, par) { super(pre, par) }
 
     Height() { return super.gword("h") }
     Weight() { return super.gword("w") }
@@ -16,10 +23,9 @@ export class KPPTRPG_FIL_IInfoAdv_TentId extends KPPTRPG_Core_Tent {
     Glob() { return new KPPTRPG_FIL_IInfoGlob_TentId(super.gword("g_")); }
 }
 
-
 /**
  * @param {KPPTRPG_FIL_IInfoAdv_TentId} idI 
- * @returns {KPPTRPG_FIL_rIInfoAdv}
+ * @returns {import("../IInfo.js").KPPTRPG_FIL_rIInfoAdv}
  */
 export function KPPTRPG_FIL_cIInfoAdv_MkHTML(idI) {
     /** @param {string | undefined} id  */
@@ -42,31 +48,11 @@ export function KPPTRPG_FIL_cIInfoAdv_MkHTML(idI) {
 }
 
 /**
- * @param {KPPTRPG_FIL_rIInfoAdv} a 
- * @returns {string}
- */
-export function KPPTRPG_FIL_cIInfoAdv_MkStr(a) {
-    return btoa(JSON.stringify(a));
-}
-
-/**
  * 
- * @param {string} a 
- * @returns {KPPTRPG_FIL_rIInfoAdv}
- */
-export function KPPTRPG_FIL_cInfoAdv_RdStr(a) {
-    return JSON.parse(atob(a));
-}
-
-
-/**
- * 
- * @param {KPPTRPG_FIL_IInfoAdv_TentId} idI 
+ * @param {import("../IInfo.js").KPPTRPG_FIL_rIInfoAdv} got 
  * @param {KPPTRPG_FIL_IInfoAdv_TentId} idO 
  */
-function _UpdateAll(idI, idO) {
-    const got = KPPTRPG_FIL_cIInfoAdv_MkHTML(idI);
-
+export function PPTRPG_FIL_cIInfoAdv_UpAll(got, idO) {
     document.getElementById(idO.Height()).innerHTML
     = got.height;
 
@@ -98,7 +84,6 @@ function _UpdateAll(idI, idO) {
     document.getElementById(idO.Glob().Etc()).innerHTML
     = got.glob.etc;
 }
-
 /**
  * @summary Basic Info Section
  * @param {KPPTRPG_FIL_IInfoAdv_TentId} idI
@@ -123,7 +108,18 @@ export function KPPTRPG_FIL_cIInfoAdv_Tent(idI, idO, rootI, rootO) {
         const el = document.createElement('button');
         el.innerHTML = "submit"
         el.onclick = () => {
-            _UpdateAll(idI, idO);
+            const got = KPPTRPG_FIL_cIInfoAdv_MkHTML(idI);
+            PPTRPG_FIL_cIInfoAdv_UpAll(got, idO);
+            
+            const c = document.getElementById(idI.par.CompO().Comp())
+
+            const got0 = KPPTRPG_FIL_cAdvI(c.innerHTML == "" ? btoa("{}") : c.innerHTML);
+            got0.iinfo = got;
+
+            c.innerHTML = KPPTRPG_Fil_cAdvO(got0);
+
+            const ccf = KPPTRPG_FIL_cAdventurer_ExportCCF(got0);
+            document.getElementById(idI.par.JsonO()).innerHTML = JSON.stringify(ccf);
         }
 
         rootI.appendChild(el);

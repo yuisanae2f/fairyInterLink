@@ -12,7 +12,3 @@
  * @property {string} desc Descryption 
  * @property {number} cnt Count
  */
-
-/**
- * @typedef {KPPTRPG_FIL_rItem[]} rItemList
- */
