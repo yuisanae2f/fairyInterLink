@@ -1,3 +1,5 @@
+import { KPPTRPG_FIL_cStatusAdv_MOV } from "../Status.js";
+
 /**
  * @param {KPPTRPG_CCF_Char_t} dest
  * @param {KPPTRPG_FIL_rStatusAdv} src0
@@ -27,7 +29,7 @@ export function KPPTRPG_FIL_cStatusAdv_ExportCCF(dest, src0, src1) {
         dest.params.push(
             {
                 label: lbl,
-                value: val
+                value: `${val}`
             }
         )
     }
@@ -38,6 +40,6 @@ export function KPPTRPG_FIL_cStatusAdv_ExportCCF(dest, src0, src1) {
     DataPrmSet("AGI", src0.AGI + src1.AGI);
     DataPrmSet("CON", src0.CON + src1.CON);
     DataPrmSet("INT", src0.INT + src1.INT);
-    DataPrmSet("MOV", src0.MOV + src1.MOV);
+    DataPrmSet("MOV", KPPTRPG_FIL_cStatusAdv_MOV(src0)); // exception
     DataPrmSet("G", src0.G + src1.G);
 }

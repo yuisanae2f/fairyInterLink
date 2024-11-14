@@ -9,7 +9,7 @@
 
 import { KPPTRPG_FIL_cBrood_Set } from "./Adventurer/Brood.js";
 import { KPPTRPG_FIL_cIInfoAdv_Set } from "./Adventurer/IInfo.js";
-import { KPPTRPG_FIL_cStatusAdv_Set } from "./Adventurer/Status.js";
+import { KPPTRPG_FIL_cStatusAdv_INIT, KPPTRPG_FIL_cStatusAdv_Set } from "./Adventurer/Status.js";
 import { KPPTRPG_FIL_cStatusAdv_ExportCCF } from "./Adventurer/Status/ExportCCF.js"
 import { KPPTRPG_FIL_cIInfoAdv_ExportCCF } from "./Adventurer/IInfo/ExportCCF.js"
 
@@ -46,7 +46,7 @@ export function KPPTRPG_FIL_cAdventurer_ExportCCF(selfconst) {
     r.data.faces = [];
     
     r.data.initiative 
-    = selfconst.status.INIT + selfconst.brood.changes.INIT;
+    = KPPTRPG_FIL_cStatusAdv_INIT(selfconst.status);
     
     //#region Global
 

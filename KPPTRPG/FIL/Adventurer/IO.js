@@ -5,7 +5,7 @@ import { KPPTRPG_FIL_cAdv_Set } from "../Adventurer.js";
  * @returns {import("../Adventurer.js").KPPTRPG_FIL_rAdventurer}
  */
 export function KPPTRPG_FIL_cAdvI(a) {
-    return KPPTRPG_FIL_cAdv_Set(JSON.parse(atob(a)))
+    return KPPTRPG_FIL_cAdv_Set(JSON.parse(a))
 }
 
 
@@ -14,5 +14,5 @@ export function KPPTRPG_FIL_cAdvI(a) {
  * @returns {string}
  */
 export function KPPTRPG_Fil_cAdvO(a) {
-    return btoa(JSON.stringify(a));
+    return JSON.stringify(a);
 }

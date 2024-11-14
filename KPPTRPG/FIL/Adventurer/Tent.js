@@ -74,7 +74,7 @@ export function KPPTRPG_FIL_cTentAdv_Init(ids, divI, divO) {
             const co = document.getElementById(ids.CompO().Comp());
 
 
-            co.innerHTML = ci.value == "" ? btoa("{}") : ci.value;
+            co.innerHTML = ci.value == "" ? "{}" : ci.value;
             const obj = KPPTRPG_FIL_cAdvI(co.innerHTML);
             PPTRPG_FIL_cIInfoAdv_UpAll(obj.iinfo, ids.IInfoAdvO());
             KPPTRPG_FIL_cStatusAdv_UpAll(obj.status, ids.StatusO());

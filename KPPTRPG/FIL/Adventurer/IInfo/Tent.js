@@ -113,7 +113,7 @@ export function KPPTRPG_FIL_cIInfoAdv_Tent(idI, idO, rootI, rootO) {
             
             const c = document.getElementById(idI.par.CompO().Comp())
 
-            const got0 = KPPTRPG_FIL_cAdvI(c.innerHTML == "" ? btoa("{}") : c.innerHTML);
+            const got0 = KPPTRPG_FIL_cAdvI(c.innerHTML == "" ? "{}" : c.innerHTML);
             got0.iinfo = got;
 
             c.innerHTML = KPPTRPG_Fil_cAdvO(got0);

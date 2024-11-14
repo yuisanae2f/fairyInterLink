@@ -1,5 +1,5 @@
 import { KPPTRPG_Core_Tent } from "../../../Core/Tent.js"
-import { KPPTRPG_FIL_cStatusAdv_Set } from "../Status.js"
+import { KPPTRPG_FIL_cStatusAdv_INIT, KPPTRPG_FIL_cStatusAdv_MOV, KPPTRPG_FIL_cStatusAdv_Set } from "../Status.js"
 import { KPPTRPG_FIL_TentAdv_Ids } from "../Tent.js"
 
 import { KPPTRPG_FIL_cAdvI, KPPTRPG_Fil_cAdvO } from "../IO.js"
@@ -40,9 +40,7 @@ export function KPPTRPG_FIL_cStatusAdv_MkHTML(idI) {
         AGI: parseInt(gByID(idI.AGI()) ?? 0),
         CON: parseInt(gByID(idI.CON()) ?? 0),
         INT: parseInt(gByID(idI.INT()) ?? 0),
-        MOV: parseInt(gByID(idI.MOV()) ?? 0),
-        G: parseInt(gByID(idI.G()) ?? 0),
-        INIT: parseInt(gByID(idI.INIT()) ?? 0)
+        G: parseInt(gByID(idI.G()) ?? 0)
     });
 }
 
@@ -71,13 +69,13 @@ export function KPPTRPG_FIL_cStatusAdv_UpAll(got, idO) {
     = got.INT;
 
     document.getElementById(idO.MOV()).innerHTML
-    = got.MOV;
+    = KPPTRPG_FIL_cStatusAdv_MOV(got);
 
     document.getElementById(idO.G()).innerHTML
     = got.G;
 
     document.getElementById(idO.INIT()).innerHTML
-    = got.INIT;
+    = KPPTRPG_FIL_cStatusAdv_INIT(got);
 }
 
 /** 
@@ -102,7 +100,7 @@ export function KPPTRPG_FIL_cStatusAdv_Tent(idI, idO, rootI, rootO) {
 
             const c = document.getElementById(idI.par.CompO().Comp())
 
-            const got0 = KPPTRPG_FIL_cAdvI(c.innerHTML == "" ? btoa("{}") : c.innerHTML)
+            const got0 = KPPTRPG_FIL_cAdvI(c.innerHTML == "" ? "{}" : c.innerHTML)
             got0.status = got;
             
             c.innerHTML = KPPTRPG_Fil_cAdvO(got0);
@@ -232,17 +230,11 @@ export function KPPTRPG_FIL_cStatusAdv_Tent(idI, idO, rootI, rootO) {
     } // INT
 
     {
-        for(const root of [rootI, rootO]) {
+        for(const root of [rootO]) {
             const title = document.createElement("span");
             title.innerHTML = "MOV: ";
             root.appendChild(title);
         }
-
-        const el = document.createElement('input');
-        el.id = idI.MOV();
-
-        rootI.appendChild(el);
-        rootI.appendChild(document.createElement("br"));
 
         const out = document.createElement('span');
         out.id = idO.MOV();
@@ -270,17 +262,11 @@ export function KPPTRPG_FIL_cStatusAdv_Tent(idI, idO, rootI, rootO) {
     } // G
 
     {
-        for(const root of [rootI, rootO]) {
+        for(const root of [rootO]) {
             const title = document.createElement("span");
             title.innerHTML = "INIT: ";
             root.appendChild(title);
         }
-
-        const el = document.createElement('input');
-        el.id = idI.INIT();
-
-        rootI.appendChild(el);
-        rootI.appendChild(document.createElement("br"));
 
         const out = document.createElement('span');
         out.id = idO.INIT();

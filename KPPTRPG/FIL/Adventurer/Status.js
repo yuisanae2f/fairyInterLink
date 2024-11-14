@@ -10,10 +10,30 @@
  * @property {number} AGI   Agility
  * @property {number} CON   Constitution
  * @property {number} INT   Intelligence
- * @property {number} MOV   Move Point
  * @property {number} G     Money
- * @property {number} INIT  Initiative
  */
+
+/**
+ * 
+ * @param {KPPTRPG_FIL_rStatusAdv} a 
+ */
+export function KPPTRPG_FIL_cStatusAdv_INIT(a) {
+    const _a = a.AGI * 10 + a.CON - 10;
+    if(_a > 100) return 100;
+    if(_a < 1) return 1;
+    return _a;
+}
+
+/**
+ * 
+ * @param {KPPTRPG_FIL_rStatusAdv} a 
+ */
+export function KPPTRPG_FIL_cStatusAdv_MOV(a) {
+    const _a = a.AGI * 10 - a.CON;
+    if(_a > 5) return 5;
+    if(_a < 1) return 1;
+    return _a;
+}
 
 /** 
  * @param {Partial<KPPTRPG_FIL_rStatusAdv>} a 
@@ -27,8 +47,6 @@ export function KPPTRPG_FIL_cStatusAdv_Set(a) {
         AGI: a?.AGI ?? 0,
         CON: a?.CON ?? 0,
         INT: a?.INT ?? 0,
-        MOV: a?.MOV ?? 0,
         G: a?.G ?? 0,
-        INIT: a?.INIT ?? 0
     }
 }
