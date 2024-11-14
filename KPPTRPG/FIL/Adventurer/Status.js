@@ -18,7 +18,7 @@
  * @param {KPPTRPG_FIL_rStatusAdv} a 
  */
 export function KPPTRPG_FIL_cStatusAdv_INIT(a) {
-    const _a = a.AGI * 10 + a.CON - 10;
+    const _a = a.AGI + a.CON - 10;
     if(_a > 100) return 100;
     if(_a < 1) return 1;
     return _a;
